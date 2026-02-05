@@ -170,6 +170,11 @@ textarea:focus-visible {
     font-size: 12px;
 }
 
+.master-pill {
+    background: rgba(230, 162, 60, 0.18);
+    color: #7a4a00;
+}
+
 .dashboard-hero {
     display: flex;
     align-items: center;
@@ -769,6 +774,11 @@ button:hover {
 .inline-form {
     display: inline-block;
     margin: 0;
+}
+
+table select,
+table input[type="password"] {
+    min-width: 160px;
 }
 
 .error {

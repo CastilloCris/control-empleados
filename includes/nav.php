@@ -2,6 +2,7 @@
 $pagina_actual = basename($_SERVER["PHP_SELF"] ?? "");
 $usuario = $_SESSION["usuario"] ?? "";
 $rol = $_SESSION["rol"] ?? "";
+$is_master = !empty($_SESSION["master_ok"]);
 ?>
 <nav class="topbar">
     <div class="topbar-inner">
@@ -17,8 +18,14 @@ $rol = $_SESSION["rol"] ?? "";
             <?php endif; ?>
             <a class="nav-link" href="dashboard.php#vacaciones-curso">Vacaciones</a>
             <a class="nav-link" href="dashboard.php#incidentes-mes">Incidentes</a>
+            <?php if ($is_master): ?>
+                <a class="nav-link <?= $pagina_actual === "admin_usuarios.php" ? "active" : "" ?>" href="admin_usuarios.php">Usuarios</a>
+            <?php endif; ?>
         </div>
         <div class="nav-user">
+            <?php if ($is_master): ?>
+                <span class="user-pill master-pill">Modo maestro</span>
+            <?php endif; ?>
             <span class="user-pill">
                 <?= htmlspecialchars($usuario, ENT_QUOTES, "UTF-8") ?>
                 ·

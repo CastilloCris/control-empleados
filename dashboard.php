@@ -245,14 +245,16 @@ $vacaciones_lista = $pdo->query("
                 <p class="menu-desc">Alta de nuevo personal.</p>
             </a>
         <?php endif; ?>
-        <a href="empleados.php" class="menu-card link-card">
-            <p class="menu-title">Registrar vacaciones</p>
-            <p class="menu-desc">Selecciona un empleado para cargar vacaciones.</p>
-        </a>
-        <a href="empleados.php" class="menu-card link-card">
-            <p class="menu-title">Registrar incidente</p>
-            <p class="menu-desc">Accede al detalle y agrega accidentes o sanciones.</p>
-        </a>
+        <?php if ($_SESSION["rol"] === "admin"): ?>
+            <a href="empleados.php" class="menu-card link-card">
+                <p class="menu-title">Registrar vacaciones</p>
+                <p class="menu-desc">Selecciona un empleado para cargar vacaciones.</p>
+            </a>
+            <a href="empleados.php" class="menu-card link-card">
+                <p class="menu-title">Registrar incidente</p>
+                <p class="menu-desc">Accede al detalle y agrega accidentes o sanciones.</p>
+            </a>
+        <?php endif; ?>
     </div>
 </div>
 

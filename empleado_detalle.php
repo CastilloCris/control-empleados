@@ -220,7 +220,7 @@ $campos_export = [
         <div class="summary-card summary-actions">
             <p class="summary-label">Acciones rapidas</p>
             <div class="actions">
-                <a class="btn btn-add" href="empleado_detalle.php?id=<?= $id ?>&view=1">Ver perfil</a>
+                <a class="btn btn-add" href="empleado_detalle.php?id=<?= $id ?>&tab=resumen">Ir a resumen</a>
                 <?php if ($can_edit): ?>
                     <a class="btn btn-edit" href="vacaciones_nueva.php?empleado_id=<?= $id ?>">Vacaciones</a>
                     <a class="btn btn-edit" href="empleado_detalle.php?id=<?= $id ?>&tab=incidentes">Incidentes</a>
@@ -231,10 +231,14 @@ $campos_export = [
 
     <div class="tabs">
         <button class="tab-btn active" data-tab="resumen">Resumen</button>
-        <button class="tab-btn" data-tab="incidentes">Incidentes</button>
-        <button class="tab-btn" data-tab="adjuntos">Adjuntos</button>
+        <?php if ($can_edit): ?>
+            <button class="tab-btn" data-tab="incidentes">Incidentes</button>
+            <button class="tab-btn" data-tab="adjuntos">Adjuntos</button>
+        <?php endif; ?>
         <button class="tab-btn" data-tab="historial">Historial</button>
-        <button class="tab-btn" data-tab="exportar">Exportar</button>
+        <?php if ($can_edit): ?>
+            <button class="tab-btn" data-tab="exportar">Exportar</button>
+        <?php endif; ?>
     </div>
 
     <div class="tab-panel active" id="tab-resumen">
@@ -285,6 +289,7 @@ $campos_export = [
         </div>
     </div>
 
+    <?php if ($can_edit): ?>
     <div class="tab-panel" id="tab-incidentes">
         <div class="section">
             <h3>Incidentes</h3>
@@ -367,7 +372,9 @@ $campos_export = [
             </table>
         </div>
     </div>
+    <?php endif; ?>
 
+    <?php if ($can_edit): ?>
     <div class="tab-panel" id="tab-adjuntos">
         <div class="section">
             <h3>Adjuntos</h3>
@@ -425,6 +432,7 @@ $campos_export = [
             </table>
         </div>
     </div>
+    <?php endif; ?>
 
     <div class="tab-panel" id="tab-historial">
         <div class="section">
@@ -456,6 +464,7 @@ $campos_export = [
         </div>
     </div>
 
+    <?php if ($can_edit): ?>
     <div class="tab-panel" id="tab-exportar">
         <div class="section">
             <h3>Exportar</h3>
@@ -490,6 +499,7 @@ $campos_export = [
             <button type="submit">Descargar</button>
         </form>
     </div>
+    <?php endif; ?>
 
 </div>
 <script>
